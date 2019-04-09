@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-#define max 100
+#define max 1000
 void push(char stack[], int *top, char data)
 {
 	if(*top < max-1)
@@ -77,7 +77,7 @@ void infix_postfix(char str[], char postfix[], int len)
 }
 int main()
 {
-	char str[100];
+	char str[1000];
 	printf("Enter your infix expression:");
 	scanf("%s",str);
 	int len = strlen(str);

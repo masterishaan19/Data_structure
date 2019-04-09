@@ -19,7 +19,7 @@ int main()
             function();
         else 
             break;
-        printf("Want to continue [Y]/[N]\n");
+        printf("Want to continue [Y]\[N]\n");
         fflush(stdin);
         scanf("%c",&res);
     }   

@@ -2,8 +2,7 @@
 #include <stdlib.h>
 typedef struct node
 {
-    int data;
-    int exp;
+    int data, exp;
     node *ptr;
 } node;
 node *create();

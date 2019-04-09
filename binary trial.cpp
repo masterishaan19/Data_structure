@@ -4,7 +4,6 @@
 typedef struct node{
 	int data;
 	node *left, *right;
-	node *parent;
 }node;
 void function();
 node*create();
@@ -16,13 +15,6 @@ void in(node *);
 void pre(node *);
 void post(node *);
 node * Search(node *, int);
-node * search_elem(node *, int );
-node * delete_node(node *, int );
-node * non(node *, int);
-node *sucessor(node *);
-node *predecessor(node *);
-int traversal(node *);
-// ------------------------------------------------------------------------------
 int main()
 {
 	printf(" \t\t <<<< Welcome to Binary Search Tree >>>>\n ");
@@ -31,7 +23,7 @@ int main()
 }
 void function()
 {
-	int ans, val;
+	int ans;
 	node *root = NULL;
 	while(1)
 	{
@@ -39,24 +31,21 @@ void function()
 		printf("1. Create \n");
 		printf("2. Display\n");
 		printf("3. Search\n");
-		printf("4. Delete Node\n");
-		printf("5. Exit\n");
+		printf("4. Exit\n");
 		scanf("%d",&ans);
-		if(ans == 5)
+		if(ans == 4)
 			break;
 		switch(ans)
 		{
 			case 1: root = create(); break;
 			case 2: display(root);break;
-			case 3: printf("Enter value to be searched...\n");
+			case 3: int val;
+					printf("Enter value to be searched...\n");
 					scanf("%d",&val);
 					node *tempo;
-					tempo = search_elem(root, val);
+					tempo = Search(root, val);
 					printf("%d",tempo->data);
-					printf("\n %u \n", &tempo);
-			case 4: printf("Enter value to be deleted....");
-					scanf("%d",&val);
-					root = delete_node(root, val);
+					printf("\n%u\n", tempo);
 		}
 	}
 }
@@ -100,7 +89,6 @@ node * insert(node *root, int val)
 		root->data = val;
 		root->left = NULL;
 		root->right = NULL;
-		root->parent = NULL;
 	}
 	else
 	{
@@ -116,7 +104,6 @@ node * insert(node *root, int val)
 				newn->left = NULL;
 				newn->right = NULL;
 				root->left = newn;
-				newn->parent = NULL;
 			}
 		}
 		else if(val > root->data)
@@ -131,7 +118,6 @@ node * insert(node *root, int val)
 				newn->left = NULL;
 				newn->right = NULL;
 				root->right = newn;
-				newn->parent = NULL;
 			}
 		}
 		else
@@ -167,7 +153,6 @@ node * nonrecursive()
 							newn->left = NULL;
 							newn->right = NULL;
 							temp->left = newn;
-							newn->parent = temp;
 							break;
 						}
 						else
@@ -183,7 +168,6 @@ node * nonrecursive()
 							newn->left = NULL;
 							newn->right = NULL;
 							temp->right = newn;
-							newn->parent = temp;
 							break;
 						}	
 						else
@@ -201,7 +185,6 @@ node * nonrecursive()
 					root->data = val;
 					root->left = NULL;
 					root->right = NULL;
-					root->parent = NULL;
 					break;
 				}
 			}
@@ -264,108 +247,4 @@ node * Search(node *root, int val)
 	}
 	else 
 		return NULL;
-}
-node * search_elem(node *root, int val)
-{
-	printf("Enter your choice : \n");
-	printf("1. Recursive search\n");
-	printf("2. Non-recursive search\n");
-	int ans;
-	node *temp;
-	scanf("%d",&ans);
-	switch(ans)
-	{
-		case 2: temp = non(root, val); break;
-		default : temp = Search(root, val); break;
-	}
-	return temp;
-}
-node* non(node *root, int val)
-{	
-	node *temp;
-	temp = root;
-	while(1)
-	{
-		if(temp != NULL)
-		{
-			if(val < temp->data)
-				temp = temp->left;
-			else if(val > temp->data)
-				temp =temp->right;
-			else
-				return temp;
-		}
-	}
-	return NULL;
-}
-node * delete_node(node *root , int val)
-{
-	node *temp;
-	temp = Search(root, val);
-	if(temp->left == NULL && temp->right == NULL)
-	{
-		node *ptr;
-		ptr = temp->parent;
-		if(ptr->left == temp)
-			ptr->left = NULL;
-		else
-			ptr->right = NULL;
-		free(temp);		
-	}
-	else if(temp->left == NULL || temp->right == NULL)
-	{
-		node * tempo;
-
-	}
-	else
-	{
-		node *tempo;
-		tempo = sucessor(temp);
-		temp->data = tempo->data;
-		delete(tempo);
-	}
-	return root;
-}
-int traversal(node *root)
-{
-	if(root != NULL)
-	{
-		if(root->right != NULL)
-			return traversal(root->right);
-		else
-		{
-			node *temp;
-			temp = root->parent;
-			if(root == temp->left)
-				temp->left = NULL;
-			else
-				temp->right = NULL;
-			free(root);
-			return root->data;
-		}
-	}
-}
-node *sucessor(node *root)
-{
-	if(root->right != NULL)
-	{
-		node *temp;
-		temp = root;
-		while(temp->left != NULL)
-		{
-			temp = temp->left;
-		}
-		return temp;
-	}
-	else
-	{
-		node *temp;
-		temp = root->parent;
-		while( temp != NULL && temp->right == root)
-		{
-			temp= temp->parent;
-			root =root->parent;
-		}
-		return temp;
-	}
 }

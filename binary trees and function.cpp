@@ -118,7 +118,7 @@ int min(node *root)
 // ----------------------------------------------------------------
 int sum(node *root)
 {
-    int x , y, z ;
+    int x = 0, y = 0, z = 0 ;
     if(root != NULL)
     {
         x = max(root->left);

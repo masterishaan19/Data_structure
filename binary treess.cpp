@@ -1,12 +1,3 @@
-// make a binary tree 
-// passing parameters
-// and making create_bt as a void function()
-// OR
-// Make a binary tree using_a stack for_ in order traversal 
-// Make a binary tree using_a queue for_ in order traversal
-// max in bt
-// min in binary 
-// level of bt_
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct node

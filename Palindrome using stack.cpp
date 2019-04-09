@@ -17,14 +17,12 @@ int palindrome(char str[], int len)
 	int top = -1;
 	int LEN;
 	int i;
-	if(len%2 == 0)
-		LEN = len/2;
-	else
-		LEN = (len -1)/2;
+//	if(len%2 == 0)
+	LEN = len/2;
+//	else
+//		LEN = (len -1)/2;
 	for(i=0; i<LEN; i++)
-	{
 		push(stack, &top, str[i]);
-	}
 	if(len %2 != 0)
 		i++;
 	char temp;
@@ -32,10 +30,7 @@ int palindrome(char str[], int len)
 	{
 		temp = pop(stack, &top);
 		if(temp != str[i])
-		{
-//			printf("")
 			return -1;
-		}
 	}
 	return 1;
 }

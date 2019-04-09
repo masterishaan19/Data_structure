@@ -112,6 +112,7 @@ node *insert_after(node *start)
 		curr->next = temp->next;
 		curr->back = temp;
 		temp->next = curr;
+		temp->next->back = curr;
 	}
 	else
 		printf("\nNo such element is found....\n\n");	
