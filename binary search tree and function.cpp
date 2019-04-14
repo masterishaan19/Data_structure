@@ -53,10 +53,10 @@ void function()
 					node *tempo;
 					tempo = search_elem(root, val);
 					printf("%d",tempo->data);
-					printf("\n %u \n", &tempo);
+					printf("\n %u \n", &tempo);break;
 			case 4: printf("Enter value to be deleted....");
 					scanf("%d",&val);
-					root = delete_node(root, val);
+					root = delete_node(root, val);break;
 		}
 	}
 }
@@ -116,7 +116,7 @@ node * insert(node *root, int val)
 				newn->left = NULL;
 				newn->right = NULL;
 				root->left = newn;
-				newn->parent = NULL;
+				newn->parent = root;
 			}
 		}
 		else if(val > root->data)
@@ -131,7 +131,7 @@ node * insert(node *root, int val)
 				newn->left = NULL;
 				newn->right = NULL;
 				root->right = newn;
-				newn->parent = NULL;
+				newn->parent = root;
 			}
 		}
 		else
@@ -263,7 +263,7 @@ node * Search(node *root, int val)
 			return Search(root->right , val);
 	}
 	else 
-		return NULL;
+		return root;
 }
 node * search_elem(node *root, int val)
 {
@@ -296,7 +296,8 @@ node* non(node *root, int val)
 				return temp;
 		}
 	}
-	return NULL;
+	node *tor = NULL;
+	return tor;
 }
 node * delete_node(node *root , int val)
 {
@@ -315,7 +316,19 @@ node * delete_node(node *root , int val)
 	else if(temp->left == NULL || temp->right == NULL)
 	{
 		node * tempo;
-
+		node *aux;
+		tempo = temp->parent;
+		if(temp->left == NULL)
+			aux = temp->right;
+		else
+			aux = temp->left;
+		if(tempo->left == temp)
+			tempo->left = aux;
+		else
+			temp->right = aux;
+		free(temp);
+		aux->parent = tempo;
+			
 	}
 	else
 	{

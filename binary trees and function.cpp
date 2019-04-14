@@ -121,9 +121,9 @@ int sum(node *root)
     int x = 0, y = 0, z = 0 ;
     if(root != NULL)
     {
-        x = max(root->left);
+        x = sum(root->left);
         y = root->data;
-        z = max(root->right); 
+        z = sum(root->right); 
         return x+y+z;
     }
     return 0;
