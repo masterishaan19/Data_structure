@@ -45,12 +45,30 @@ node *create()
 node *merge(node *root, node *toor)
 {
 	node *mergo;
-	if(root->data > toor->data)
-		mergo = toor;
-	else	
-		mergo = root;
-	
-	
+	mergo = root;
+	node *temp, *temp2;
+	temp = root;
+	temp2 = toor;
+	node *prev;
+	node *next;
+	while(temp2 != NULL && temp != NULL)
+	{
+		if(temp->data <= temp2->data)
+		{
+			prev = temp;
+			temp = temp->ptr;
+		}
+		else
+		{
+			prev->ptr = temp2;
+			next = temp2->ptr;
+			temp2->ptr = temp;
+			temp2 = temp2->ptr;
+			temp2 = next;
+		}
+	}
+	if(temp == NULL)
+		prev->ptr = temp2;
 	return mergo;
 }
 int main()
@@ -62,7 +80,11 @@ int main()
 	display(root);
 	printf("\nSecond oredered list be : \n");
 	display(toor);
-	mergo = mergelist(root, toor);
-	printf("After merging your link list look alike: \n");
+	node *mergo;
+	if(root->data < toor->data)
+		mergo = merge(root, toor);
+	else 
+		mergo = merge(toor, root);
+	printf("\nAfter merging your link list look alike: \n");
 	display(mergo);
 }

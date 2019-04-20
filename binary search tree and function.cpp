@@ -6,22 +6,22 @@ typedef struct node{
 	node *left, *right;
 	node *parent;
 }node;
-void function();
 node*create();
-void display(node *);
-node* recursive();
-node* nonrecursive();
-node * insert(node *, int);
+void function();
 void in(node *);
 void pre(node *);
 void post(node *);
-node * Search(node *, int);
-node * search_elem(node *, int );
-node * delete_node(node *, int );
-node * non(node *, int);
-node *sucessor(node *);
-node *predecessor(node *);
+node* recursive();
+node* nonrecursive();
+void display(node *);
 int traversal(node *);
+node*sucessor(node *);
+node* non(node *, int);
+node* predecessor(node *);
+node* insert(node *, int);
+node* Search(node *, int);
+node* search_elem(node *, int );
+node* delete_node(node *, int );
 // ------------------------------------------------------------------------------
 int main()
 {
